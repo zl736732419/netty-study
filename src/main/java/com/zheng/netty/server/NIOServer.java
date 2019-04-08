@@ -9,11 +9,12 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 /**
+ * NIO编程
+ * 单一线程负责监听客户端连接以及处理多个客户端请求
  * @Author zhenglian
  * @Date 2019/4/7
  */
 public class NIOServer { 
-    private static final Integer PORT = 8000;
     private Selector selector;
     
     public void initServer(int port) throws Exception {
@@ -31,22 +32,29 @@ public class NIOServer {
     private void listen() throws Exception {
        System.out.println("服务端启动成功");
         Iterator<SelectionKey> iterator;
-        SelectionKey key;
         while (true) {
            // 当注册事件到达时，方法返回，否则一直阻塞下去
            selector.select();
            iterator = selector.selectedKeys().iterator();
            while (iterator.hasNext()) {
-               key = iterator.next();
+               SelectionKey key = iterator.next();
                // 删除已经选择的key,防止重复处理
                iterator.remove();
-               if (key.isAcceptable()) { // OP_ACCEPT
-                   handleAccept(key);
-               } else if (key.isReadable()) { // OP_READ
-                   handleRead(key);
-               }
+               handle(key);
            }
        }
+    }
+
+    private void handle(SelectionKey key) {
+        try {
+            if (key.isAcceptable()) { // OP_ACCEPT
+                handleAccept(key);
+            } else if (key.isReadable()) { // OP_READ
+                handleRead(key);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleRead(SelectionKey key) throws Exception {

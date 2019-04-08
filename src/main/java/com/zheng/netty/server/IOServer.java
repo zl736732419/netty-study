@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 
 /**
  * 传统socket编程
- *
+ * 多线程处理客户端请求
  * @Author zhenglian
  * @Date 2019/4/7
  */
