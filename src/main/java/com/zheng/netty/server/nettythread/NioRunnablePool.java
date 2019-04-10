@@ -5,6 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 工作线程池
+ * 负责boss, worker线程的初始化工作
+ * 以及从中获取一个boss, worker
  * @Author zhenglian
  * @Date 2019/4/9
  */
@@ -15,9 +17,7 @@ public class NioRunnablePool {
     private AtomicInteger bossIndex = new AtomicInteger(0);
     private AtomicInteger workerIndex = new AtomicInteger(0);
     
-    public NioRunnablePool(ExecutorService boss, ExecutorService worker) {
-        int bossNum = 1;
-        int workerNum = Runtime.getRuntime().availableProcessors() * 2;
+    public NioRunnablePool(ExecutorService boss, int bossNum, ExecutorService worker, int workerNum) {
         initBoss(bossNum, boss);
         initWorker(workerNum, worker);
         System.out.println(bossNum + " boss start, " + workerNum + " workers start.");
