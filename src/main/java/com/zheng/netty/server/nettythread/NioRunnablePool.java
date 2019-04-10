@@ -44,6 +44,4 @@ public class NioRunnablePool {
     public Worker nextWorker() {
         return workers[Math.abs(workerIndex.getAndIncrement() % workers.length)];
     }
-    
-    
 }
