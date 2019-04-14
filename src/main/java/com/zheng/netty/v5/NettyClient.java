@@ -1,12 +1,11 @@
 package com.zheng.netty.v5;
 
+import com.zheng.netty.v5.handler.HiHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
@@ -56,31 +55,6 @@ public class NettyClient {
             e.printStackTrace();
         } finally {
           worker.shutdownGracefully();  
-        }
-    }
-    
-    private static class HiHandler extends SimpleChannelInboundHandler<String> {
-        @Override
-        protected void messageReceived(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
-            System.out.println("response: " + msg);
-        }
-
-        @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
-            super.channelActive(ctx);
-            System.out.println("channelActive");
-        }
-
-        @Override
-        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-            super.channelInactive(ctx);
-            System.out.println("channelInactive");
-        }
-
-        @Override
-        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-            super.exceptionCaught(ctx, cause);
-            System.out.println("exceptionCaught");
         }
     }
 }
