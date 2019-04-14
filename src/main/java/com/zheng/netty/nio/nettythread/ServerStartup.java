@@ -1,4 +1,4 @@
-package com.zheng.netty.server.nettythread;
+package com.zheng.netty.nio.nettythread;
 
 import java.util.Arrays;
 import java.util.concurrent.Executors;

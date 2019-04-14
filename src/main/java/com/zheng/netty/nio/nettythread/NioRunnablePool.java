@@ -1,4 +1,4 @@
-package com.zheng.netty.server.nettythread;
+package com.zheng.netty.nio.nettythread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
