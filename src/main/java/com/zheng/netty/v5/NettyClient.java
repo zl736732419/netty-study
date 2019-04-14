@@ -1,4 +1,4 @@
-package com.zheng.netty.v4;
+package com.zheng.netty.v5;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -61,7 +61,7 @@ public class NettyClient {
     
     private static class HiHandler extends SimpleChannelInboundHandler<String> {
         @Override
-        protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        protected void messageReceived(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
             System.out.println("response: " + msg);
         }
 
