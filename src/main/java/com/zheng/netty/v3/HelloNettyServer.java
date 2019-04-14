@@ -19,7 +19,7 @@ public class HelloNettyServer {
 //            ChannelPipeline pipeline = Channels.pipeline();
 //            pipeline.addLast("decoder", new StringDecoder(StandardCharsets.UTF_8));
 //            pipeline.addLast("encoder", new StringEncoder());
-//            pipeline.addLast("hello", new HelloHandler());
+//            pipeline.addLast("hello", new ServerHandler());
 //            return pipeline;
 //        });
 //        // 监听端口
@@ -27,7 +27,7 @@ public class HelloNettyServer {
 //        System.out.println("服务器已启动，正在监听8000端口");
 //    }
 //
-//    private static class HelloHandler extends SimpleChannelHandler {
+//    private static class ServerHandler extends SimpleChannelHandler {
 //        /**
 //         * 消息处理
 //         * @param ctx

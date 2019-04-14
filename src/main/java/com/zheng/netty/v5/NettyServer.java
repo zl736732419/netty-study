@@ -1,6 +1,6 @@
 package com.zheng.netty.v5;
 
-import com.zheng.netty.v5.handler.HelloHandler;
+import com.zheng.netty.v5.handler.ServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -11,6 +11,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
 
 /**
  * @Author zhenglian
@@ -34,9 +35,11 @@ public class NettyServer {
             bootstrap.childHandler(new ChannelInitializer<Channel>() {
                 @Override
                 protected void initChannel(Channel ch) throws Exception {
+                    // 添加心跳检测(这里是添加定时，用于触发空闲事件，事件处理由helloHandler处理)
+                    ch.pipeline().addLast("idle", new IdleStateHandler(5, 0, 15));
                     ch.pipeline().addLast("decoder", new StringDecoder());
                     ch.pipeline().addLast("encoder", new StringEncoder());
-                    ch.pipeline().addLast("hello", new HelloHandler());
+                    ch.pipeline().addLast("hello", new ServerHandler());
                 }
             });
 
@@ -46,7 +49,7 @@ public class NettyServer {
             bootstrap.childOption(ChannelOption.TCP_NODELAY, true); // SocketChannel设置，关闭消息延迟发送
 
             // 绑定端口
-            ChannelFuture future = bootstrap.bind(8000);
+            ChannelFuture future = bootstrap.bind("192.168.3.12", 8000);
             System.out.println("sever start...");
 
             // 等待服务器关闭

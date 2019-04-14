@@ -1,7 +1,7 @@
 package com.zheng.netty.v5;
 
 
-import com.zheng.netty.v5.handler.HiHandler;
+import com.zheng.netty.v5.handler.ClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -52,7 +52,7 @@ public class MultiClient {
             protected void initChannel(Channel ch) throws Exception {
                 ch.pipeline().addLast("decoder", new StringDecoder());
                 ch.pipeline().addLast("encoder", new StringEncoder());
-                ch.pipeline().addLast("hi", new HiHandler());
+                ch.pipeline().addLast("hi", new ClientHandler());
             }
         });
 

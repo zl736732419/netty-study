@@ -19,7 +19,7 @@ public class HelloNettyClient {
 //            ChannelPipeline pipeline = Channels.pipeline();
 //            pipeline.addLast("decoder", new StringDecoder(StandardCharsets.UTF_8));
 //            pipeline.addLast("encoder", new StringEncoder(StandardCharsets.UTF_8));
-//            pipeline.addLast("hi", new HiHandler());
+//            pipeline.addLast("hi", new ClientHandler());
 //            return pipeline;
 //        });
 //        // 连接服务器
@@ -38,7 +38,7 @@ public class HelloNettyClient {
 //        channel.close();
 //    }
 //    
-//    private static class HiHandler extends SimpleChannelHandler {
+//    private static class ClientHandler extends SimpleChannelHandler {
 //        @Override
 //        public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
 //            System.out.println("messageReceived");
