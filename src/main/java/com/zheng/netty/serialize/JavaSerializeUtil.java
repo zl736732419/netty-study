@@ -12,15 +12,15 @@ import java.io.ObjectOutputStream;
  */
 public class JavaSerializeUtil {
     
-    public static <T> byte[] serialize(T player) {
-        if (null == player) {
+    public static <T> byte[] serialize(T bean) {
+        if (null == bean) {
             return null;
         }
         ObjectOutputStream objOutput = null;
         try {
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             objOutput = new ObjectOutputStream(output);
-            objOutput.writeObject(player);
+            objOutput.writeObject(bean);
             return output.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();

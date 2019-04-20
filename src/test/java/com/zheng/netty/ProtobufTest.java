@@ -1,6 +1,7 @@
 package com.zheng.netty;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.zheng.netty.serialize.PersonModule;
 import com.zheng.netty.serialize.PlayerModule;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
  */
 public class ProtobufTest {
     @Test
-    public void test() {
+    public void palyerTest() {
         PlayerModule.Player player = PlayerModule.Player.newBuilder()
                 .setId(1).setAge(20).setName("zhangsan").build();
         byte[] bytes = player.toByteArray();
@@ -36,4 +37,25 @@ public class ProtobufTest {
         name: "zhangsan"
         */
     }
+    
+    @Test
+    public void personTest() throws Exception {
+        PersonModule.Person.PhoneNumber number =
+                PersonModule.Person.PhoneNumber.newBuilder()
+                .setNumber("1234567")
+                .setType(PersonModule.Person.PhoneType.MOBILE)
+                .build();
+        PersonModule.Person person = PersonModule.Person.newBuilder()
+                .setName("张三")
+                .setId(1)
+                .setEmail("1234566@qq.com")
+                .addPhone(number)
+                .build();
+
+        byte[] bytes = person.toByteArray();
+        System.out.println(Arrays.toString(bytes));
+        PersonModule.Person person1 = PersonModule.Person.parseFrom(bytes);
+        System.out.println(person1);
+    }
+    
 }
