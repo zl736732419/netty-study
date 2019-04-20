@@ -1,7 +1,7 @@
-package com.zheng.netty;
+package com.zheng.netty.serialize;
 
 import com.zheng.netty.serialize.JavaSerializeUtil;
-import com.zheng.netty.serialize.Player;
+import com.zheng.netty.serialize.protobuf.Player;
 import org.junit.Test;
 
 import java.util.Arrays;

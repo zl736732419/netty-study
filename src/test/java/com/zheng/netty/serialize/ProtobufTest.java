@@ -1,8 +1,8 @@
-package com.zheng.netty;
+package com.zheng.netty.serialize;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.zheng.netty.serialize.PersonModule;
-import com.zheng.netty.serialize.PlayerModule;
+import com.zheng.netty.serialize.protobuf.PersonModule;
+import com.zheng.netty.serialize.protobuf.PlayerModule;
 import org.junit.Test;
 
 import java.util.Arrays;

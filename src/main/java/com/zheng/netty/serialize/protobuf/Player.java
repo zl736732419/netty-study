@@ -1,4 +1,4 @@
-package com.zheng.netty.serialize;
+package com.zheng.netty.serialize.protobuf;
 
 import java.io.Serializable;
 import java.util.ArrayList;

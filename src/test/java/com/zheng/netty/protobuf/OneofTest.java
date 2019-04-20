@@ -1,6 +1,6 @@
-package com.zheng.netty;
+package com.zheng.netty.protobuf;
 
-import com.zheng.netty.serialize.OneofApp;
+import com.zheng.netty.serialize.protobuf.OneofApp;
 import org.junit.Test;
 
 /**

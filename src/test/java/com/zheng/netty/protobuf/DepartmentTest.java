@@ -1,7 +1,7 @@
-package com.zheng.netty;
+package com.zheng.netty.protobuf;
 
-import com.zheng.netty.serialize.DepartmentModule;
-import com.zheng.netty.serialize.DepartmentModule2;
+import com.zheng.netty.serialize.protobuf.DepartmentModule;
+import com.zheng.netty.serialize.protobuf.DepartmentModule2;
 import org.junit.Test;
 
 /**

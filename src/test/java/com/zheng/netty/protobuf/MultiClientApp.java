@@ -1,4 +1,4 @@
-package com.zheng.netty;
+package com.zheng.netty.protobuf;
 
 import com.zheng.netty.v5.MultiClient;
 

@@ -1,8 +1,8 @@
-package com.zheng.netty;
+package com.zheng.netty.protobuf;
 
-import com.zheng.netty.serialize.ExtensionApp1;
-import com.zheng.netty.serialize.FooApp;
-import com.zheng.netty.serialize.FooApp1;
+import com.zheng.netty.serialize.protobuf.ExtensionApp1;
+import com.zheng.netty.serialize.protobuf.FooApp;
+import com.zheng.netty.serialize.protobuf.FooApp1;
 import org.junit.Test;
 
 /**
