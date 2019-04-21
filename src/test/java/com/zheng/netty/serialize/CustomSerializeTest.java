@@ -1,5 +1,6 @@
 package com.zheng.netty.serialize;
 
+import com.zheng.netty.serialize.protobuf.PBPerson;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.junit.Test;
@@ -75,6 +76,19 @@ public class CustomSerializeTest {
         System.out.println("id:" + channelBuffer1.readInt());
         System.out.println("age:" + channelBuffer1.readInt());
         
+    }
+    
+    @Test
+    public void test4() throws Exception {
+        PBPerson.Person person = PBPerson.Person.newBuilder()
+                .setId(10)
+                .setAge(20)
+                .build();
+        byte[] bytes = person.toByteArray();
+        System.out.println(Arrays.toString(bytes));
+        System.out.println("==========================");
+        PBPerson.Person person1 = PBPerson.Person.parseFrom(bytes);
+        System.out.println(person1);
     }
     
     /**

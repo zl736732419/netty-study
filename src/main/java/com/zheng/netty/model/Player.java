@@ -60,7 +60,7 @@ public class Player extends CustomSerializer {
         playerId = readLong();
         name = readString();
         skills = readList(Integer.class);
-        read(Resource.class);
+        resource = read(Resource.class);
     }
 
     @Override
@@ -69,6 +69,7 @@ public class Player extends CustomSerializer {
                 "playerId=" + playerId +
                 ", name='" + name + '\'' +
                 ", skills=" + skills +
+                ", resource=" + resource +
                 '}';
     }
 }

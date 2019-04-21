@@ -1,0 +1,14 @@
+syntax="proto2";
+option java_package="com.zheng.netty.serialize";
+option java_outer_classname="PBPlayer";
+
+message Player {
+    optional int64 playerId = 1;
+    optional string name = 2;
+    repeated int32 skills=3;
+    optional Resource resource=4;
+}
+
+message Resource {
+    optional int32 gold = 1;
+}

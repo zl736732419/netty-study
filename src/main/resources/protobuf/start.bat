@@ -1,2 +1,2 @@
-protoc.exe --java_out=../../java ./Player.proto
+protoc.exe --java_out=../../java ./PBPerson.proto
 pause

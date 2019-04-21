@@ -1,0 +1,8 @@
+syntax="proto2";
+option java_package="com.zheng.netty.serialize.protobuf";
+option java_outer_classname="PBPerson";
+
+message Person {
+    optional int32 id=1;
+    optional int32 age=2;
+}
