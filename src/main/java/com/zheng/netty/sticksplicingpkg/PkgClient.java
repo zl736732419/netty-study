@@ -1,6 +1,7 @@
 package com.zheng.netty.sticksplicingpkg;
 
 
+import com.zheng.netty.game.constant.Constants;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
@@ -50,14 +51,28 @@ public class PkgClient {
             channel.write("hello");
         }
     }
-    
+
+    /**
+     * 定义数据格式
+     * +——-—----——+——-----——+——-----——+
+     * |   包头    |   长度   |   数据   |
+     * +——-—----——+——-----——+——-----——+
+     * 包头：4bytes,标识数据包
+     * 长度：4bytes，标识数据长度
+     * 数据：真实传递的数据
+     */
     private static class StickSpliceClientHandler extends OneToOneEncoder {
         @Override
         protected Object encode(ChannelHandlerContext ctx, Channel channel, Object obj) throws Exception {
             ChannelBuffer buffer = (ChannelBuffer) obj;
             int length = buffer.readableBytes();
-            ByteBuffer byteBuffer = ByteBuffer.allocate(4 + length);
+            // 定义数据包的整体大小 4bytes包头+ 4bytes长度 + 数据
+            ByteBuffer byteBuffer = ByteBuffer.allocate(4 + 4 + length);
+            // 写入包头
+            byteBuffer.putInt(Constants.FLAG);
+            // 写入数据长度
             byteBuffer.putInt(length);
+            // 写入数据
             byte[] data = new byte[length];
             buffer.readBytes(data);
             byteBuffer.put(data);

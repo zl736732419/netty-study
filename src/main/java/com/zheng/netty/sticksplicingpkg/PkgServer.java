@@ -1,6 +1,7 @@
 package com.zheng.netty.sticksplicingpkg;
 
 
+import com.zheng.netty.game.constant.Constants;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
@@ -59,20 +60,54 @@ public class PkgServer {
         }
     }
 
+    /**
+     * 稳定安全能防止socket字节流攻击的解码器
+     * +——-—----——+——-----——+——-----——+
+     * |   包头    |   长度   |   数据   |
+     * +——-—----——+——-----——+——-----——+
+     * 包头：4bytes,标识数据包
+     * 长度：4bytes，标识数据长度
+     * 数据：真实传递的数据
+     */
     private static class StickSplicePkgHandler extends FrameDecoder {
+        // 包头 + 长度
+        private static final int BASE_LENGTH = 4 + 4;
+        // 设定最大数据包长度
+        private static final int MAX_LENGTH = 2048;
+        
         @Override
         protected Object decode(ChannelHandlerContext ctx, Channel channel, ChannelBuffer buffer) throws Exception {
-            // 定义发送的消息是4字节长度+string数据
-            if (buffer.readableBytes() < 4) {
-                return null; // 继续等待数据到来
+            // 数据包不完整，等待
+            if (buffer.readableBytes() < BASE_LENGTH) {
+                return null;
             }
-            // 标记当前准备读取数据的位置
-            buffer.markReaderIndex();
+            // 数据包过大，直接跳过这批数据
+            if (buffer.readableBytes() > MAX_LENGTH) {
+                buffer.skipBytes(buffer.readableBytes());
+                return null;
+            }
+            int beginIndex; // 记录下一个包头的有效数据位置
+            // 数据包清除可能会导致数据不完整，无法定位正确的包头位置，所以这里需要遍历直到定位到包头为止
+            while (true) {
+                buffer.markReaderIndex();
+                beginIndex = buffer.readerIndex();
+                // 成功定位到包头，开始往后读取数据
+                if (buffer.readInt() == Constants.FLAG) {
+                    break;
+                }
+                buffer.resetReaderIndex();
+                // 如果没有找到，每次往前移动1byte，主要是防止读取过多字节会直接跳过下一个有效的包头位置
+                buffer.readByte();
+                // 字节读取之后可能会导致数据又不够的情况
+                if (buffer.readableBytes() < BASE_LENGTH) {
+                    return null;
+                }
+            }
             // 读取数据包长度
             int length = buffer.readInt();
             if (buffer.readableBytes() < length) {
                 // 数据不完整，等待
-                buffer.resetReaderIndex();
+                buffer.readerIndex(beginIndex);
                 return null;
             }
             byte[] bytes = new byte[length];
