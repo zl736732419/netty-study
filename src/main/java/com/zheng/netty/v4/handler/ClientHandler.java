@@ -1,4 +1,4 @@
-package com.zheng.netty.v5.handler;
+package com.zheng.netty.v4.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -21,7 +21,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    protected void messageReceived(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
         String channelId = channelHandlerContext.channel().toString();
         System.out.println("channel " + channelId + "response: " + msg);
     }

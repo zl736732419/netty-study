@@ -1,4 +1,4 @@
-package com.zheng.netty.v5.handler;
+package com.zheng.netty.v4.handler;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -49,7 +49,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    protected void messageReceived(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
         System.out.println("收到消息:" + msg);
         String response = "hi";
         if (Objects.equals("heart_beat_request", msg)) {

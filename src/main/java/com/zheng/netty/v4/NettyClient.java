@@ -1,6 +1,6 @@
-package com.zheng.netty.v5;
+package com.zheng.netty.v4;
 
-import com.zheng.netty.v5.handler.ClientHandler;
+import com.zheng.netty.v4.handler.ClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;

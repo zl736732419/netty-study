@@ -1,6 +1,6 @@
 package com.zheng.netty.protobuf;
 
-import com.zheng.netty.v5.MultiClient;
+import com.zheng.netty.v4.MultiClient;
 
 import java.io.InputStreamReader;
 import java.util.Scanner;
